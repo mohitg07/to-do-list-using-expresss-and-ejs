@@ -1,0 +1,28 @@
+
+<%- include('header'); -%>
+
+<div class="box" id="heading">
+  <h1><%= listTitle %></h1>
+</div>
+
+<div class="box">
+
+  <% for(var i=0; i<newListItems.length; ++i) { %>
+     <form action="/delete" method="post">
+       <div class="item">
+         <!-- whenever user clicks on checkbox then it will submit the form and send the post request  -->
+         <input type="checkbox" onChange="this.form.submit()" name="checkbox" value="<%=newListItems[i]._id %>">
+         <p><%= newListItems[i].name %></p>
+       </div>
+       <!-- A hidden field let web developers include data that cannot be seen or modified by users when a form is submitted. -->
+       <input type="hidden" name="listName" value="<%= listTitle %>">
+     </form>
+  <% } %>
+
+  <form class="item" action="/" method="post">
+    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+    <button type="submit" name="list" value="<%= listTitle %>">+</button>
+  </form>
+</div>
+
+<%- include('footer'); -%>
